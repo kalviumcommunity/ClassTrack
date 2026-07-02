@@ -116,17 +116,17 @@ const Reports = () => {
   };
 
   return (
-    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up">
+    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up transition-colors duration-300">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Attendance Reports</h1>
-          <p className="text-slate-500 text-sm mt-1">Generate filtered logs and export in PDF or CSV format.</p>
+          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white transition-colors duration-300">Attendance Reports</h1>
+          <p className="text-slate-500 dark:text-gray-400 text-sm mt-1 transition-colors duration-300">Generate filtered logs and export in PDF or CSV format.</p>
         </div>
         <button
           onClick={fetchReport}
           disabled={loading}
-          className="flex items-center gap-2 px-5 py-2.5 bg-academic-600 hover:bg-academic-700 text-white rounded-xl text-sm font-bold shadow-md shadow-academic-600/10 disabled:opacity-55 active:scale-[0.98]"
+          className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold shadow-md shadow-blue-600/10 disabled:opacity-55 active:scale-[0.98] transition-all"
         >
           {loading ? (
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -140,27 +140,27 @@ const Reports = () => {
       </div>
 
       {/* Filter Panel */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 transition-colors duration-300">
         {/* Student selector (optional) */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Student (optional)</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Student (optional)</label>
           <input
             type="text"
             name="studentId"
             placeholder="Enter student ID or name"
             value={filters.studentId}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           />
         </div>
         {/* Department */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Department</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Department</label>
           <select
             name="department"
             value={filters.department}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">All Departments</option>
             {departments.map(d => <option key={d} value={d}>{d}</option>)}
@@ -168,12 +168,12 @@ const Reports = () => {
         </div>
         {/* Year */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Year</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Year</label>
           <select
             name="year"
             value={filters.year}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">All Years</option>
             {years.map(y => <option key={y} value={y}>{y}</option>)}
@@ -181,36 +181,36 @@ const Reports = () => {
         </div>
         {/* Section */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Section</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Section</label>
           <select
             name="section"
             value={filters.section}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">All Sections</option>
-            {sections.map(s => <option key={s} value={s}>Section {s}</option>)}
+            {sections.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
         {/* Date Range */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Start Date</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Start Date</label>
           <input
             type="date"
             name="startDate"
             value={filters.startDate}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">End Date</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">End Date</label>
           <input
             type="date"
             name="endDate"
             value={filters.endDate}
             onChange={handleInputChange}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           />
         </div>
       </div>
@@ -218,52 +218,52 @@ const Reports = () => {
       {/* Stats Overview */}
       {stats && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-          <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center">
-            <h4 className="text-xs font-bold uppercase text-slate-400 mb-2">Total Records</h4>
-            <p className="text-3xl font-extrabold text-slate-800">{stats.totalRecords}</p>
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-gray-800 flex flex-col items-center transition-colors duration-300">
+            <h4 className="text-xs font-bold uppercase text-slate-400 dark:text-gray-500 mb-2 transition-colors duration-300">Total Records</h4>
+            <p className="text-3xl font-extrabold text-slate-800 dark:text-white transition-colors duration-300">{stats.totalRecords}</p>
           </div>
-          <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center">
-            <h4 className="text-xs font-bold uppercase text-slate-400 mb-2">Present</h4>
-            <p className="text-3xl font-extrabold text-emerald-600">{stats.presentCount}</p>
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-gray-800 flex flex-col items-center transition-colors duration-300">
+            <h4 className="text-xs font-bold uppercase text-slate-400 dark:text-gray-500 mb-2 transition-colors duration-300">Present</h4>
+            <p className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-500 transition-colors duration-300">{stats.presentCount}</p>
           </div>
-          <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center">
-            <h4 className="text-xs font-bold uppercase text-slate-400 mb-2">Absent</h4>
-            <p className="text-3xl font-extrabold text-rose-600">{stats.absentCount}</p>
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-gray-800 flex flex-col items-center transition-colors duration-300">
+            <h4 className="text-xs font-bold uppercase text-slate-400 dark:text-gray-500 mb-2 transition-colors duration-300">Absent</h4>
+            <p className="text-3xl font-extrabold text-red-600 dark:text-red-500 transition-colors duration-300">{stats.absentCount}</p>
           </div>
-          <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center">
-            <h4 className="text-xs font-bold uppercase text-slate-400 mb-2">Late</h4>
-            <p className="text-3xl font-extrabold text-amber-600">{stats.lateCount}</p>
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-gray-800 flex flex-col items-center transition-colors duration-300">
+            <h4 className="text-xs font-bold uppercase text-slate-400 dark:text-gray-500 mb-2 transition-colors duration-300">Late</h4>
+            <p className="text-3xl font-extrabold text-amber-600 dark:text-amber-500 transition-colors duration-300">{stats.lateCount}</p>
           </div>
         </div>
       )}
 
       {/* Records Table */}
       {records.length > 0 && (
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-x-auto mt-6">
+        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-slate-100 dark:border-gray-800 overflow-x-auto mt-6 transition-colors duration-300">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-100">
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Student</th>
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Roll No.</th>
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Class</th>
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Date</th>
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
-                <th className="px-5 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Marked By</th>
+              <tr className="bg-slate-50 dark:bg-gray-800/50 border-b border-slate-100 dark:border-gray-800 transition-colors duration-300">
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Student</th>
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Roll No.</th>
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Class</th>
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Date</th>
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-5 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Marked By</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 text-sm">
+            <tbody className="divide-y divide-slate-100 dark:divide-gray-800 text-sm transition-colors duration-300">
               {records.map((rec) => (
-                <tr key={rec._id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-slate-800">{rec.studentId?.name ?? 'N/A'}</td>
-                  <td className="px-5 py-3 text-slate-700">{rec.studentId?.rollNumber ?? 'N/A'}</td>
-                  <td className="px-5 py-3 text-slate-600">
+                <tr key={rec._id} className="hover:bg-slate-50 dark:hover:bg-gray-800/50 transition-colors">
+                  <td className="px-5 py-3 font-medium text-slate-800 dark:text-gray-200 transition-colors duration-300">{rec.studentId?.name ?? 'N/A'}</td>
+                  <td className="px-5 py-3 text-slate-700 dark:text-gray-300 transition-colors duration-300">{rec.studentId?.rollNumber ?? 'N/A'}</td>
+                  <td className="px-5 py-3 text-slate-600 dark:text-gray-400 transition-colors duration-300">
                     {rec.studentId?.department} • {rec.studentId?.year.split(' ')[0]} • Sec {rec.studentId?.section}
                   </td>
-                  <td className="px-5 py-3 text-slate-600">{new Date(rec.date).toLocaleDateString('en-US')}</td>
-                  <td className={`px-5 py-3 font-semibold ${rec.status === 'Present' ? 'text-emerald-600' : rec.status === 'Late' ? 'text-amber-600' : 'text-rose-600'}`}>
+                  <td className="px-5 py-3 text-slate-600 dark:text-gray-400 transition-colors duration-300">{new Date(rec.date).toLocaleDateString('en-US')}</td>
+                  <td className={`px-5 py-3 font-semibold transition-colors duration-300 ${rec.status === 'Present' ? 'text-emerald-600 dark:text-emerald-500' : rec.status === 'Late' ? 'text-amber-600 dark:text-amber-500' : 'text-red-600 dark:text-red-500'}`}>
                     {rec.status}
                   </td>
-                  <td className="px-5 py-3 text-slate-500">{rec.markedBy?.name ?? 'Admin'}</td>
+                  <td className="px-5 py-3 text-slate-500 dark:text-gray-400 transition-colors duration-300">{rec.markedBy?.name ?? 'Admin'}</td>
                 </tr>
               ))}
             </tbody>
@@ -293,7 +293,7 @@ const Reports = () => {
 
       {/* No Records Message */}
       {records.length === 0 && !loading && (
-        <div className="flex flex-col items-center gap-2 py-12 text-slate-400">
+        <div className="flex flex-col items-center gap-2 py-12 text-slate-400 dark:text-gray-500 transition-colors duration-300">
           <AlertCircle className="h-8 w-8" />
           <p className="text-sm font-semibold">No attendance records to display.</p>
           <p className="text-xs">Adjust filters and click "Generate Report".</p>

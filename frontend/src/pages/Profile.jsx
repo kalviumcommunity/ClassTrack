@@ -71,25 +71,25 @@ const Profile = () => {
   const avatarInitials = user?.name?.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'U';
 
   return (
-    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up">
+    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up transition-colors duration-300">
       {/* Header */}
       <div>
-        <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Profile Settings</h1>
-        <p className="text-slate-500 text-sm mt-1">Manage your account information and security settings.</p>
+        <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white transition-colors duration-300">Profile Settings</h1>
+        <p className="text-slate-500 dark:text-gray-400 text-sm mt-1 transition-colors duration-300">Manage your account information and security settings.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Avatar Card */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col items-center text-center">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-gray-800 flex flex-col items-center text-center transition-colors duration-300">
             {/* Avatar */}
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4 transition-colors duration-300">
               <span className="text-2xl font-extrabold text-white">{avatarInitials}</span>
             </div>
-            <h2 className="text-slate-900 font-extrabold text-lg">{user?.name}</h2>
-            <p className="text-slate-500 text-sm">{user?.email}</p>
-            <span className={`mt-3 px-3 py-1 rounded-full text-xs font-bold capitalize ${
-              user?.role === 'admin' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'
+            <h2 className="text-slate-900 dark:text-white font-extrabold text-lg transition-colors duration-300">{user?.name}</h2>
+            <p className="text-slate-500 dark:text-gray-400 text-sm transition-colors duration-300">{user?.email}</p>
+            <span className={`mt-3 px-3 py-1 rounded-full text-xs font-bold capitalize transition-colors duration-300 ${
+              user?.role === 'admin' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400' : 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
             }`}>
               {user?.role}
             </span>
@@ -99,20 +99,20 @@ const Profile = () => {
               <div className="mt-5 w-full space-y-2 text-left">
                 {user?.rollNumber && (
                   <div className="flex items-center gap-2">
-                    <BookOpen className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="text-xs text-slate-600 font-medium">{user.rollNumber}</span>
+                    <BookOpen className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
+                    <span className="text-xs text-slate-600 dark:text-gray-400 font-medium transition-colors duration-300">{user.rollNumber}</span>
                   </div>
                 )}
                 {user?.department && (
                   <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="text-xs text-slate-600 font-medium">{user.department} • {user.year} • Sec {user.section}</span>
+                    <ShieldCheck className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
+                    <span className="text-xs text-slate-600 dark:text-gray-400 font-medium transition-colors duration-300">{user.department} • {user.year} • Sec {user.section}</span>
                   </div>
                 )}
                 {user?.phone && (
                   <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="text-xs text-slate-600 font-medium">{user.phone}</span>
+                    <Phone className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
+                    <span className="text-xs text-slate-600 dark:text-gray-400 font-medium transition-colors duration-300">{user.phone}</span>
                   </div>
                 )}
               </div>
@@ -123,15 +123,15 @@ const Profile = () => {
         {/* Main Settings Area */}
         <div className="lg:col-span-3 space-y-5">
           {/* Tabs */}
-          <div className="flex gap-2 bg-slate-100 rounded-2xl p-1.5 w-fit">
+          <div className="flex gap-2 bg-slate-100 dark:bg-gray-800 rounded-2xl p-1.5 w-fit transition-colors duration-300">
             {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-bold transition-all ${
                   activeTab === tab.id
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-700'
+                    ? 'bg-white dark:bg-gray-700 text-slate-900 dark:text-white shadow-sm'
+                    : 'text-slate-500 dark:text-gray-400 hover:text-slate-700 dark:hover:text-gray-200'
                 }`}
               >
                 <tab.icon className="w-4 h-4" />
@@ -142,38 +142,38 @@ const Profile = () => {
 
           {/* Personal Info Tab */}
           {activeTab === 'info' && (
-            <form onSubmit={handleUpdateInfo} className="bg-white rounded-3xl p-6 lg:p-8 shadow-sm border border-slate-100 space-y-5">
-              <h3 className="text-slate-900 font-extrabold text-lg">Personal Information</h3>
+            <form onSubmit={handleUpdateInfo} className="bg-white dark:bg-gray-900 rounded-3xl p-6 lg:p-8 shadow-sm border border-slate-100 dark:border-gray-800 space-y-5 transition-colors duration-300">
+              <h3 className="text-slate-900 dark:text-white font-extrabold text-lg transition-colors duration-300">Personal Information</h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Full Name</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Full Name</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
                     <input
                       type="text" name="name" value={form.name} onChange={handleInfoChange} required
-                      className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm"
+                      className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Email Address</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Email Address</label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
                     <input
                       type="email" name="email" value={form.email} onChange={handleInfoChange} required
-                      className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm"
+                      className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                     />
                   </div>
                 </div>
                 {user?.role === 'student' && (
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Phone</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Phone</label>
                     <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
                       <input
                         type="tel" name="phone" value={form.phone} onChange={handleInfoChange}
-                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm"
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                       />
                     </div>
                   </div>
@@ -182,15 +182,15 @@ const Profile = () => {
 
               {/* Read-only student fields */}
               {user?.role === 'student' && (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 border-t border-slate-100">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2 border-t border-slate-100 dark:border-gray-800 transition-colors duration-300">
                   {[
                     { label: 'Roll Number', value: user?.rollNumber },
                     { label: 'Department', value: user?.department },
                     { label: 'Year & Section', value: `${user?.year} • Sec ${user?.section}` },
                   ].map(field => (
                     <div key={field.label}>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">{field.label}</label>
-                      <div className="px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-slate-600 text-sm font-medium">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-2 transition-colors duration-300">{field.label}</label>
+                      <div className="px-4 py-3 bg-slate-100 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-600 dark:text-gray-300 text-sm font-medium transition-colors duration-300">
                         {field.value || '—'}
                       </div>
                     </div>
@@ -200,7 +200,7 @@ const Profile = () => {
 
               <button
                 type="submit" disabled={loading}
-                className="flex items-center gap-2 px-6 py-2.5 bg-academic-600 hover:bg-academic-700 text-white rounded-xl text-sm font-bold shadow-md shadow-academic-600/10 disabled:opacity-60 active:scale-[0.98] transition-all"
+                className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold shadow-md shadow-blue-600/10 disabled:opacity-60 active:scale-[0.98] transition-all"
               >
                 {loading ? (
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -213,9 +213,9 @@ const Profile = () => {
 
           {/* Security Tab */}
           {activeTab === 'security' && (
-            <form onSubmit={handleUpdatePassword} className="bg-white rounded-3xl p-6 lg:p-8 shadow-sm border border-slate-100 space-y-5">
-              <h3 className="text-slate-900 font-extrabold text-lg">Change Password</h3>
-              <p className="text-slate-500 text-sm">Choose a strong password that you don't use on other sites.</p>
+            <form onSubmit={handleUpdatePassword} className="bg-white dark:bg-gray-900 rounded-3xl p-6 lg:p-8 shadow-sm border border-slate-100 dark:border-gray-800 space-y-5 transition-colors duration-300">
+              <h3 className="text-slate-900 dark:text-white font-extrabold text-lg transition-colors duration-300">Change Password</h3>
+              <p className="text-slate-500 dark:text-gray-400 text-sm transition-colors duration-300">Choose a strong password that you don't use on other sites.</p>
 
               {[
                 { name: 'currentPassword', label: 'Current Password', placeholder: 'Your current password' },
@@ -223,13 +223,13 @@ const Profile = () => {
                 { name: 'confirmPassword', label: 'Confirm New Password', placeholder: 'Repeat new password' },
               ].map(field => (
                 <div key={field.name}>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">{field.label}</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">{field.label}</label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-gray-500 transition-colors duration-300" />
                     <input
                       type="password" name={field.name} value={pwForm[field.name]} onChange={handlePwChange}
                       placeholder={field.placeholder}
-                      className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm"
+                      className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                     />
                   </div>
                 </div>
@@ -237,7 +237,7 @@ const Profile = () => {
 
               <button
                 type="submit" disabled={loading}
-                className="flex items-center gap-2 px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm font-bold shadow-md shadow-rose-600/10 disabled:opacity-60 active:scale-[0.98] transition-all"
+                className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold shadow-md shadow-blue-600/10 disabled:opacity-60 active:scale-[0.98] transition-all"
               >
                 {loading ? (
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />

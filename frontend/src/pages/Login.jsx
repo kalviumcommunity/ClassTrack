@@ -50,37 +50,37 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-gray-900 px-4 py-12 relative overflow-hidden transition-colors duration-300">
       {/* Background Decorative Blobs */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-academic-200/40 blur-3xl -z-10"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-academic-300/30 blur-3xl -z-10"></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-blue-200/40 dark:bg-blue-900/20 blur-3xl -z-10 transition-colors duration-300"></div>
+      <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-blue-300/30 dark:bg-blue-800/20 blur-3xl -z-10 transition-colors duration-300"></div>
 
       <div className="w-full max-w-md animate-fade-in-up">
         {/* Brand */}
         <div className="flex flex-col items-center mb-8">
-          <div className="bg-academic-600 p-4 rounded-2xl shadow-xl shadow-academic-600/20 mb-3 flex items-center justify-center">
+          <div className="bg-blue-600 p-4 rounded-2xl shadow-xl shadow-blue-600/20 mb-3 flex items-center justify-center transition-colors duration-300">
             <GraduationCap className="h-10 w-10 text-white" />
           </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">ClassTrack</h2>
-          <p className="text-slate-500 text-sm mt-1 font-medium">Student Attendance Management System</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white transition-colors duration-300">ClassTrack</h2>
+          <p className="text-slate-500 dark:text-gray-400 text-sm mt-1 font-medium transition-colors duration-300">Student Attendance Management System</p>
         </div>
 
         {/* Card Panel */}
-        <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-slate-100 p-8">
-          <h3 className="text-xl font-bold text-slate-800 mb-6 text-center">Sign In to Portal</h3>
+        <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-3xl shadow-xl border border-slate-100 dark:border-gray-800 p-8 transition-colors duration-300">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-6 text-center transition-colors duration-300">Sign In to Portal</h3>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Email Address</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Email Address</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-gray-500 transition-colors duration-300">
                   <Mail className="h-5 w-5" />
                 </div>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-academic-500 focus:border-academic-500 transition-all text-sm font-medium"
+                  className="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm font-medium"
                   placeholder="Enter email"
                   required
                 />
@@ -88,16 +88,16 @@ const Login = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Password</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Password</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 dark:text-gray-500 transition-colors duration-300">
                   <Lock className="h-5 w-5" />
                 </div>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-academic-500 focus:border-academic-500 transition-all text-sm font-medium"
+                  className="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm font-medium"
                   placeholder="Enter password"
                   required
                 />
@@ -107,7 +107,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-academic-600 hover:bg-academic-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-academic-500 transition-all disabled:opacity-55 active:scale-[0.98]"
+              className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-2xl shadow-lg text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all disabled:opacity-55 active:scale-[0.98]"
             >
               {loading ? (
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
@@ -118,33 +118,33 @@ const Login = () => {
           </form>
 
           {/* Quick-Fill Helpers */}
-          <div className="mt-8 pt-6 border-t border-slate-100">
-            <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 justify-center">
-              <KeyRound className="h-4.5 w-4.5 text-slate-400" />
+          <div className="mt-8 pt-6 border-t border-slate-100 dark:border-gray-800 transition-colors duration-300">
+            <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-gray-500 mb-3 justify-center transition-colors duration-300">
+              <KeyRound className="h-4.5 w-4.5 text-slate-400 dark:text-gray-500" />
               Quick-Fill Demo Credentials
             </span>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => fillCredentials('admin')}
-                className="px-3 py-2 bg-academic-50 hover:bg-academic-100 text-academic-700 text-xs font-bold rounded-xl border border-academic-100 transition-colors"
+                className="px-3 py-2 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 text-blue-700 dark:text-blue-400 text-xs font-bold rounded-xl border border-blue-100 dark:border-blue-900/50 transition-colors"
               >
                 Admin Credentials
               </button>
               <button
                 type="button"
                 onClick={() => fillCredentials('student')}
-                className="px-3 py-2 bg-slate-100 hover:bg-slate-200/80 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 transition-colors"
+                className="px-3 py-2 bg-slate-100 dark:bg-gray-800 hover:bg-slate-200/80 dark:hover:bg-gray-700 text-slate-700 dark:text-gray-300 text-xs font-bold rounded-xl border border-slate-200 dark:border-gray-700 transition-colors"
               >
                 Student Demo
               </button>
             </div>
-            <p className="text-[10px] text-slate-400 text-center mt-2 font-medium">
+            <p className="text-[10px] text-slate-400 dark:text-gray-500 text-center mt-2 font-medium transition-colors duration-300">
               Note: Register a student in admin panel to test student login
             </p>
-            <p className="text-center text-blue-300 text-sm mt-3">
+            <p className="text-center text-slate-600 dark:text-gray-400 text-sm mt-3 transition-colors duration-300">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-blue-200 font-bold hover:text-white transition-colors">Create one</Link>
+              <Link to="/signup" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300 transition-colors">Create one</Link>
             </p>
           </div>
         </div>

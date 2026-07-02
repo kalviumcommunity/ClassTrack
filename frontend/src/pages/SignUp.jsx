@@ -54,40 +54,40 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-900 flex items-center justify-center p-4 transition-colors duration-300 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-800/20 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/40 dark:bg-blue-900/20 rounded-full blur-3xl transition-colors duration-300" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300/30 dark:bg-blue-800/20 rounded-full blur-3xl transition-colors duration-300" />
       </div>
 
-      <div className="relative w-full max-w-2xl">
+      <div className="relative w-full max-w-2xl animate-fade-in-up">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-lg shadow-blue-600/30 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl shadow-lg shadow-blue-600/30 mb-4 transition-colors duration-300">
             <GraduationCap className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">ClassTrack</h1>
-          <p className="text-blue-300 text-sm mt-1">Create your account</p>
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight transition-colors duration-300">ClassTrack</h1>
+          <p className="text-slate-500 dark:text-gray-400 text-sm mt-1 transition-colors duration-300">Create your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl space-y-5">
+        <form onSubmit={handleSubmit} className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-slate-100 dark:border-gray-800 rounded-3xl p-8 shadow-xl space-y-5 transition-colors duration-300">
           {/* Name + Email */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Full Name *</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Full Name *</label>
               <input
                 type="text" name="name" required value={form.name} onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Email *</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Email *</label>
               <input
                 type="email" name="email" required value={form.email} onChange={handleChange}
                 placeholder="john@example.com"
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
               />
             </div>
           </div>
@@ -95,31 +95,31 @@ const SignUp = () => {
           {/* Password */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Password *</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Password *</label>
               <div className="relative">
                 <input
                   type={showPw ? 'text' : 'password'} name="password" required value={form.password} onChange={handleChange}
                   placeholder="Min. 6 characters"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm pr-10"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm pr-10 transition-colors duration-300"
                 />
-                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-300">
+                <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-gray-500 transition-colors duration-300">
                   {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Confirm Password *</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Confirm Password *</label>
               <input
                 type="password" name="confirmPassword" required value={form.confirmPassword} onChange={handleChange}
                 placeholder="Repeat password"
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
               />
             </div>
           </div>
 
           {/* Role */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Role *</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Role *</label>
             <div className="flex gap-3">
               {['student', 'admin'].map(r => (
                 <button
@@ -128,7 +128,7 @@ const SignUp = () => {
                   className={`flex-1 py-2.5 rounded-xl text-sm font-bold capitalize transition-all ${
                     form.role === r
                       ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                      : 'bg-white/10 text-blue-200 border border-white/20'
+                      : 'bg-slate-50 dark:bg-gray-800 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-gray-700'
                   }`}
                 >
                   {r}
@@ -139,51 +139,51 @@ const SignUp = () => {
 
           {/* Student-specific fields */}
           {form.role === 'student' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/10 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-slate-100 dark:border-gray-800 pt-4 transition-colors duration-300">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Roll Number</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Roll Number</label>
                 <input
                   type="text" name="rollNumber" value={form.rollNumber} onChange={handleChange}
                   placeholder="e.g. CS2024001"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Department</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Department</label>
                 <select
                   name="department" value={form.department} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-800 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                 >
                   <option value="">Select Department</option>
                   {departments.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Year</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Year</label>
                 <select
                   name="year" value={form.year} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-800 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                 >
                   <option value="">Select Year</option>
                   {years.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Section</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Section</label>
                 <select
                   name="section" value={form.section} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-800 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                 >
                   <option value="">Select Section</option>
-                  {sections.map(s => <option key={s} value={s}>Section {s}</option>)}
+                  {sections.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-xs font-bold uppercase tracking-wider text-blue-200 mb-2">Phone</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Phone</label>
                 <input
                   type="tel" name="phone" value={form.phone} onChange={handleChange}
                   placeholder="e.g. +91 9876543210"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/60 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-colors duration-300"
                 />
               </div>
             </div>
@@ -192,7 +192,7 @@ const SignUp = () => {
           {/* Submit */}
           <button
             type="submit" disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold rounded-xl text-sm shadow-lg shadow-blue-600/30 disabled:opacity-60 active:scale-[0.98] transition-all"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm shadow-lg shadow-blue-600/30 disabled:opacity-60 active:scale-[0.98] transition-all"
           >
             {loading ? (
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -201,9 +201,9 @@ const SignUp = () => {
             )}
           </button>
 
-          <p className="text-center text-blue-300 text-sm">
+          <p className="text-center text-slate-600 dark:text-gray-400 text-sm transition-colors duration-300">
             Already have an account?{' '}
-            <Link to="/login" className="text-blue-200 font-bold hover:text-white transition-colors">Sign in</Link>
+            <Link to="/login" className="text-blue-600 dark:text-blue-400 font-bold hover:text-blue-700 dark:hover:text-blue-300 transition-colors">Sign in</Link>
           </p>
         </form>
       </div>

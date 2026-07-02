@@ -85,60 +85,60 @@ const AttendanceMarking = () => {
   };
 
   return (
-    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up">
+    <div className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-8 animate-fade-in-up transition-colors duration-300">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Mark Attendance</h1>
-          <p className="text-slate-500 text-sm mt-1">Select a class and record daily presence</p>
+          <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white transition-colors duration-300">Mark Attendance</h1>
+          <p className="text-slate-500 dark:text-gray-400 text-sm mt-1 transition-colors duration-300">Select a class and record daily presence</p>
         </div>
         <button
           onClick={() => { resetState(); setDate(formatDate(new Date())); setDepartment(''); setYear(''); setSection(''); }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-white text-slate-800 border border-slate-200 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-gray-700 rounded-xl text-sm font-medium hover:bg-slate-50 dark:hover:bg-gray-700 transition-colors shadow-sm"
         >
           Reset Form
         </button>
       </div>
 
       {/* Filter Section */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 transition-colors duration-300">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Date</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Date</label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm font-medium transition-colors"
           />
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Department</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Department</label>
           <select
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">Select Department</option>
             {departments.map(d => <option key={d} value={d}>{d}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Year</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Year</label>
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">Select Year</option>
             {years.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Section</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Section</label>
           <select
             value={section}
             onChange={(e) => setSection(e.target.value)}
-            className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-academic-500 text-sm font-medium"
+            className="block w-full px-4 py-2.5 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium transition-colors"
           >
             <option value="">Select Section</option>
             {sections.map(s => <option key={s} value={s}>Section {s}</option>)}
@@ -151,7 +151,7 @@ const AttendanceMarking = () => {
         <button
           onClick={checkAttendance}
           disabled={checking}
-          className="flex items-center gap-2 px-5 py-2.5 bg-academic-600 hover:bg-academic-700 text-white rounded-xl text-sm font-bold shadow-md shadow-academic-600/10 disabled:opacity-55 active:scale-[0.98]"
+          className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold shadow-md shadow-blue-600/10 disabled:opacity-55 active:scale-[0.98] transition-all"
         >
           {checking ? (
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -182,54 +182,54 @@ const AttendanceMarking = () => {
 
       {/* Attendance Grid */}
       {students.length > 0 && (
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-slate-100 dark:border-gray-800 overflow-hidden transition-colors duration-300">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-100">
-                <th className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Roll No.</th>
-                <th className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Student Name</th>
-                <th className="px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Status</th>
+              <tr className="bg-slate-50 dark:bg-gray-800/50 border-b border-slate-100 dark:border-gray-800 transition-colors duration-300">
+                <th className="px-6 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Roll No.</th>
+                <th className="px-6 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider">Student Name</th>
+                <th className="px-6 py-3 text-xs font-bold text-slate-400 dark:text-gray-500 uppercase tracking-wider text-center">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-gray-800 transition-colors duration-300">
               {students.map(stu => (
-                <tr key={stu._id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-3 font-medium text-slate-800">{stu.rollNumber}</td>
-                  <td className="px-6 py-3 text-slate-700">{stu.name}</td>
+                <tr key={stu._id} className="hover:bg-slate-50 dark:hover:bg-gray-800/50 transition-colors">
+                  <td className="px-6 py-3 font-medium text-slate-800 dark:text-gray-200 transition-colors duration-300">{stu.rollNumber}</td>
+                  <td className="px-6 py-3 text-slate-700 dark:text-gray-300 transition-colors duration-300">{stu.name}</td>
                   <td className="px-6 py-3 text-center">
-                    <div className="inline-flex gap-2 items-center bg-slate-50 rounded-xl px-3 py-1.5">
-                      <label className="inline-flex items-center gap-1.5">
+                    <div className="inline-flex gap-2 items-center bg-slate-50 dark:bg-gray-800 rounded-xl px-3 py-1.5 transition-colors duration-300">
+                      <label className="inline-flex items-center gap-1.5 cursor-pointer">
                         <input
                           type="radio"
                           name={`status-${stu._id}`}
                           value="Present"
                           checked={statusMap[stu._id] === 'Present'}
                           onChange={() => handleStatusChange(stu._id, 'Present')}
-                          className="form-radio h-4 w-4 text-emerald-600"
+                          className="form-radio h-4 w-4 text-emerald-600 focus:ring-emerald-500 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
                         />
-                        <span className="text-sm font-medium text-emerald-600">P</span>
+                        <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">P</span>
                       </label>
-                      <label className="inline-flex items-center gap-1.5">
+                      <label className="inline-flex items-center gap-1.5 cursor-pointer">
                         <input
                           type="radio"
                           name={`status-${stu._id}`}
                           value="Late"
                           checked={statusMap[stu._id] === 'Late'}
                           onChange={() => handleStatusChange(stu._id, 'Late')}
-                          className="form-radio h-4 w-4 text-amber-600"
+                          className="form-radio h-4 w-4 text-amber-600 focus:ring-amber-500 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
                         />
-                        <span className="text-sm font-medium text-amber-600">L</span>
+                        <span className="text-sm font-medium text-amber-600 dark:text-amber-400">L</span>
                       </label>
-                      <label className="inline-flex items-center gap-1.5">
+                      <label className="inline-flex items-center gap-1.5 cursor-pointer">
                         <input
                           type="radio"
                           name={`status-${stu._id}`}
                           value="Absent"
                           checked={statusMap[stu._id] === 'Absent'}
                           onChange={() => handleStatusChange(stu._id, 'Absent')}
-                          className="form-radio h-4 w-4 text-rose-600"
+                          className="form-radio h-4 w-4 text-red-600 focus:ring-red-500 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600"
                         />
-                        <span className="text-sm font-medium text-rose-600">A</span>
+                        <span className="text-sm font-medium text-red-600 dark:text-red-400">A</span>
                       </label>
                     </div>
                   </td>
@@ -242,7 +242,7 @@ const AttendanceMarking = () => {
 
       {/* Duplicate warning */}
       {isMarked && (
-        <div className="flex items-center gap-2 bg-amber-50 text-amber-800 p-4 rounded-xl border border-amber-200 mt-4">
+        <div className="flex items-center gap-2 bg-amber-50 dark:bg-amber-900/30 text-amber-800 dark:text-amber-500 p-4 rounded-xl border border-amber-200 dark:border-amber-900/50 mt-4 transition-colors duration-300">
           <AlertCircle className="h-5 w-5" />
           <p className="text-sm font-medium">Attendance for this class on the selected date has already been recorded. You may edit existing entries by adjusting the status and clicking ‘Save Attendance’.</p>
         </div>

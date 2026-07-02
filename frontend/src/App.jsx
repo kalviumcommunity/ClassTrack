@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Pages
 import Login from './pages/Login';
@@ -19,7 +20,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Layout wrapper that includes Sidebar for authenticated routes
 const AppLayout = ({ children }) => (
-  <div className="flex h-screen bg-slate-50 overflow-hidden">
+  <div className="flex h-screen bg-slate-50 dark:bg-gray-950 overflow-hidden transition-colors duration-300">
     <Sidebar />
     <main className="flex-1 overflow-y-auto flex flex-col min-h-screen lg:min-h-0">
       {children}
@@ -45,10 +46,10 @@ const RootRedirect = () => {
 
   if (loading) {
     return (
-      <div className="flex h-screen w-screen items-center justify-center bg-slate-50">
+      <div className="flex h-screen w-screen items-center justify-center bg-slate-50 dark:bg-gray-950 transition-colors duration-300">
         <div className="flex flex-col items-center gap-3">
           <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
-          <span className="text-sm font-semibold text-slate-500">Loading ClassTrack...</span>
+          <span className="text-sm font-semibold text-slate-500 dark:text-gray-400">Loading ClassTrack...</span>
         </div>
       </div>
     );
@@ -137,11 +138,13 @@ const AppRoutes = () => (
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
