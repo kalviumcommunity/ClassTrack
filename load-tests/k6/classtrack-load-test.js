@@ -115,7 +115,7 @@ export default function (data) {
 
   group('Attendance Records', () => {
     const today = new Date().toISOString().split('T')[0];
-    const attRes = http.get(`${BASE_URL}/attendance/check?date=${today}`, { headers });
+    const attRes = http.get(`${BASE_URL}/attendance/check?date=${today}&department=CS&year=1st&section=A`, { headers });
     const attOk = check(attRes, {
       'Attendance: status 200 or 401': (r) => r.status === 200 || r.status === 401,
     });
