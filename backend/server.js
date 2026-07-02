@@ -24,7 +24,9 @@ const limiter = rateLimit({
   max: 200,
   message: { message: 'Too many requests from this IP, please try again later.' },
 });
-app.use('/api/', limiter);
+if (process.env.NODE_ENV !== 'test') {
+  app.use('/api/', limiter);
+}
 
 // CORS
 app.use(cors({
