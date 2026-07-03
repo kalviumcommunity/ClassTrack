@@ -11,14 +11,30 @@
 
 ### A Modern MERN Stack Student Attendance Management Platform
 
-Built using **React.js**, **Node.js**, **Express.js**, and **MongoDB**, ClassTrack streamlines attendance management through dedicated Admin and Student portals with secure authentication, analytics, and reporting.
+Built using **React.js**, **Node.js**, **Express.js**, and **MongoDB**, ClassTrack streamlines attendance management through dedicated **Admin** and **Student** portals with secure authentication, analytics, reporting, and performance-focused architecture.
 
 </div>
 
 ---
 
+# 🚨 Problem Statement
+
+Educational institutions often rely on traditional attendance management methods that are **time-consuming, error-prone, and difficult to scale**. Manual record-keeping or fragmented digital solutions make it challenging to maintain accurate attendance records, monitor student participation, generate reports, and identify students with poor attendance. Faculty also spend significant time performing repetitive administrative tasks instead of focusing on teaching.
+
+---
+
+# 💡 Proposed Solution
+
+**ClassTrack** is a centralized web-based attendance management platform designed to simplify and automate the entire attendance workflow. It enables administrators to efficiently manage students, record attendance, generate detailed reports, and analyze attendance trends through an intuitive dashboard. Students can securely access their attendance history, monitor their attendance percentage, and manage their profiles from a dedicated portal.
+
+Built on the **MERN Stack**, ClassTrack emphasizes **security, scalability, responsiveness, and ease of use**, providing institutions with a reliable and modern solution for digital attendance management.
+
+---
+
 # 📚 Table of Contents
 
+- Problem Statement
+- Proposed Solution
 - Overview
 - Features
 - Tech Stack
@@ -39,9 +55,9 @@ Built using **React.js**, **Node.js**, **Express.js**, and **MongoDB**, ClassTra
 
 # 📖 Overview
 
-Managing attendance manually is tedious, time-consuming, and susceptible to errors. **ClassTrack** digitizes this workflow by providing a centralized web application where administrators can manage students, record attendance, generate reports, and monitor attendance trends, while students can securely access their own attendance information.
+Managing attendance manually is tedious, time-consuming, and susceptible to errors. **ClassTrack** digitizes this workflow by providing a centralized web application where administrators can manage students, record attendance, generate reports, monitor attendance trends, and export attendance records. Students can securely access their attendance history, attendance percentage, and profile information through a dedicated dashboard.
 
-The application follows a clean MERN architecture with REST APIs, JWT-based authentication, MongoDB for persistent storage, and a responsive React frontend.
+The application follows a clean **MERN architecture** with RESTful APIs, JWT-based authentication, MongoDB for persistent storage, and a responsive React frontend, ensuring a secure, scalable, and user-friendly experience.
 
 ---
 
