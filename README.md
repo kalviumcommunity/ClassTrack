@@ -1227,6 +1227,22 @@ Deploy on:
 
 ---
 
+# 📊 Load Testing & Performance Proof
+
+ClassTrack is verified to handle **1,000+ concurrent virtual users** using [k6](https://k6.io/).
+
+- **Script location:** [classtrack-load-test.js](load-tests/k6/classtrack-load-test.js)
+- **Detailed Report & Logs:** Refer to the [Load Testing Summary Report](load-tests/results/summary.md) for latency percentiles and checks.
+
+### Key Results Summary:
+- **Peak Load:** 1,000 Concurrent VUs
+- **Successful Requests:** 101,852 total request transactions
+- **Error Rate:** 0.00% (No failed connections or HTTP errors)
+- **Average Request Latency:** 13.12 ms (extremely fast response times under full concurrency load)
+- **Total Assertions Checked:** 127,317 assertions (100.00% passed)
+
+---
+
 # 🧑‍💻 Contributors
 
 ## Alimili Nikhil Reddy

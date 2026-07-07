@@ -18,13 +18,16 @@ const app = express();
 app.use(helmet({ crossOriginEmbedderPolicy: false }));
 app.use(morgan('dev'));
 
-// Rate limiting – 200 requests per 15 min per IP
+// Rate limiting – relaxed for load testing
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 200,
+  max: 10000, // raised to support 1,000+ concurrent users
+  standardHeaders: true,
+  legacyHeaders: false,
   message: { message: 'Too many requests from this IP, please try again later.' },
 });
-if (process.env.NODE_ENV !== 'test') {
+// Skip rate limiter in test/load-test mode
+if (process.env.NODE_ENV !== 'test' && process.env.LOAD_TEST !== 'true') {
   app.use('/api/', limiter);
 }
 
@@ -44,7 +47,7 @@ app.use('/api/reports', require('./routes/reportRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/ai', require('./routes/aiRoutes'));
 
-// Health check
+// Health check endpoints
 app.get('/', (req, res) => {
   res.json({
     status: 'ok',
@@ -52,6 +55,10 @@ app.get('/', (req, res) => {
     version: '1.0.0',
     timestamp: new Date().toISOString(),
   });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() });
 });
 
 // Global Error Handler

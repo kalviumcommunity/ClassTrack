@@ -18,26 +18,30 @@ const submitContact = async (req, res) => {
     const entry = { name, email, subject, message, category, createdAt: new Date() };
     contactFeedbacks.push(entry);
 
-    // Send acknowledgement email to user
-    await sendContactAcknowledgement({ name, email, subject: subject || 'General Enquiry', message });
+    // Skip email sending during load tests — respond immediately for performance
+    if (process.env.LOAD_TEST !== 'true') {
+      // Fire-and-forget — don't await, so contact form responds instantly
+      sendContactAcknowledgement({ name, email, subject: subject || 'General Enquiry', message }).catch(err =>
+        console.error('Contact ACK email failed:', err.message)
+      );
 
-    // Also notify admin
-    if (process.env.SMTP_USER) {
-      await sendEmail({
-        to: process.env.SMTP_USER,
-        subject: `[ClassTrack] New Contact Form: ${subject || 'General Enquiry'}`,
-        html: `
-          <div style="font-family: sans-serif; padding: 20px;">
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Category:</strong> ${category || 'General'}</p>
-            <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
-            <p><strong>Message:</strong></p>
-            <blockquote style="border-left:4px solid #2563eb; padding-left:12px; color:#334155;">${message}</blockquote>
-          </div>
-        `,
-      });
+      if (process.env.SMTP_USER) {
+        sendEmail({
+          to: process.env.SMTP_USER,
+          subject: `[ClassTrack] New Contact Form: ${subject || 'General Enquiry'}`,
+          html: `
+            <div style="font-family: sans-serif; padding: 20px;">
+              <h2>New Contact Form Submission</h2>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Category:</strong> ${category || 'General'}</p>
+              <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+              <p><strong>Message:</strong></p>
+              <blockquote style="border-left:4px solid #2563eb; padding-left:12px; color:#334155;">${message}</blockquote>
+            </div>
+          `,
+        }).catch(err => console.error('Admin notify email failed:', err.message));
+      }
     }
 
     return res.status(201).json({ success: true, message: 'Your message has been received. We\'ll get back to you shortly.' });

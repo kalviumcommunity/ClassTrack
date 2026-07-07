@@ -51,3 +51,6 @@ load-tests/results/
 
 # Vite cache
 .vite/
+
+# k6 executable binary
+load-tests/k6.exe
