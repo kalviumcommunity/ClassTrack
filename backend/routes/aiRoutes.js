@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
 const { smartSearch } = require('../services/aiSearchService');
+const { predictStudentRisk } = require('../services/aiPredictorService');
 
 // @desc    AI-powered smart student search
 // @route   GET /api/ai/search?q=<query>
@@ -18,6 +19,20 @@ router.get('/search', protect, async (req, res) => {
   } catch (error) {
     console.error('AI search route error:', error);
     return res.status(500).json({ message: 'Search failed' });
+  }
+});
+
+// @desc    AI-powered student attendance risk prediction
+// @route   GET /api/ai/predict/:studentId
+// @access  Private
+router.get('/predict/:studentId', protect, async (req, res) => {
+  const { studentId } = req.params;
+  try {
+    const prediction = await predictStudentRisk(studentId);
+    return res.json(prediction);
+  } catch (error) {
+    console.error('AI prediction route error:', error);
+    return res.status(500).json({ message: error.message || 'Prediction failed' });
   }
 });
 

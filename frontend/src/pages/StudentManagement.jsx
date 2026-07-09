@@ -11,7 +11,8 @@ import {
   ArrowUpDown,
   Filter,
   Check,
-  AlertTriangle
+  AlertTriangle,
+  Sparkles
 } from 'lucide-react';
 import Toast from '../components/Toast';
 
@@ -37,8 +38,28 @@ const StudentManagement = () => {
   // Modal states
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isPredictModalOpen, setIsPredictModalOpen] = useState(false);
+  const [predictLoading, setPredictLoading] = useState(false);
+  const [predictionData, setPredictionData] = useState(null);
+  const [selectedStudentForPredict, setSelectedStudentForPredict] = useState(null);
   const [currentStudent, setCurrentStudent] = useState(null); // null for Add, student object for Edit
   const [deleteTargetId, setDeleteTargetId] = useState(null);
+
+  const runPrediction = async (student) => {
+    setSelectedStudentForPredict(student);
+    setIsPredictModalOpen(true);
+    setPredictLoading(true);
+    try {
+      const res = await api.get(`/ai/predict/${student._id}`);
+      setPredictionData(res.data);
+    } catch (error) {
+      console.error('Error fetching AI prediction:', error);
+      setToast({ message: 'Failed to generate AI Risk Report', type: 'error' });
+      setIsPredictModalOpen(false);
+    } finally {
+      setPredictLoading(false);
+    }
+  };
 
   // Form states
   const [formData, setFormData] = useState({
@@ -328,6 +349,13 @@ const StudentManagement = () => {
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end gap-2">
                         <button
+                          onClick={() => runPrediction(student)}
+                          className="p-2 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-xl text-slate-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors animate-pulse"
+                          title="AI Attendance Diagnostics"
+                        >
+                          <Sparkles className="h-4.5 w-4.5" />
+                        </button>
+                        <button
                           onClick={() => openEditModal(student)}
                           className="p-2 hover:bg-slate-100 dark:hover:bg-gray-700 rounded-xl text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                           title="Edit details"
@@ -548,6 +576,113 @@ const StudentManagement = () => {
               >
                 Yes, Delete
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AI Risk Predictor Modal */}
+      {isPredictModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-slate-900/60 dark:bg-gray-900/80 backdrop-blur-sm" onClick={() => setIsPredictModalOpen(false)}></div>
+          <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-xl w-full max-w-md overflow-hidden animate-fade-in-up border border-slate-100 dark:border-gray-800 z-10 transition-colors duration-300 flex flex-col max-h-[90vh]">
+            {/* Header */}
+            <div className="p-5 border-b border-slate-100 dark:border-gray-800 flex items-center justify-between transition-colors duration-300">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-purple-600 dark:text-purple-400 animate-pulse" />
+                <span className="font-extrabold text-slate-800 dark:text-white text-base">AI Attendance Risk Diagnostic</span>
+              </div>
+              <button onClick={() => setIsPredictModalOpen(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 overflow-y-auto flex-1 space-y-5">
+              {predictLoading ? (
+                <div className="py-12 flex flex-col items-center gap-3">
+                  <div className="h-10 w-10 animate-spin rounded-full border-4 border-purple-600 border-t-transparent"></div>
+                  <span className="text-sm font-bold text-slate-400 dark:text-gray-500 animate-pulse">Running diagnostic models...</span>
+                </div>
+              ) : predictionData ? (
+                <div className="space-y-5">
+                  {/* Student details */}
+                  <div className="bg-slate-50 dark:bg-gray-800/50 rounded-2xl p-4 transition-colors">
+                    <h4 className="font-extrabold text-slate-800 dark:text-white text-sm">{predictionData.studentName}</h4>
+                    <p className="text-xs text-slate-400 dark:text-gray-500 font-bold mt-0.5">{predictionData.rollNumber} • {selectedStudentForPredict?.department}</p>
+                  </div>
+
+                  {/* Main Metrics Card */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-slate-50 dark:bg-gray-800/30 border border-slate-100 dark:border-gray-800 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                      <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">Attendance Rate</span>
+                      <span className="text-2xl font-black text-slate-800 dark:text-white mt-1">{predictionData.attendanceRate}%</span>
+                    </div>
+                    <div className="bg-slate-50 dark:bg-gray-800/30 border border-slate-100 dark:border-gray-800 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                      <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">AI Forecast</span>
+                      <span className="text-2xl font-black text-purple-600 dark:text-purple-400 mt-1">{predictionData.predictedNextPresence}%</span>
+                    </div>
+                  </div>
+
+                  {/* Risk & Trend badgify */}
+                  <div className="flex items-center justify-between border-y border-slate-100 dark:border-gray-800 py-3 text-xs font-bold transition-colors">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-slate-400">Risk Tier:</span>
+                      <span className={`px-2.5 py-1 rounded-full ${
+                        predictionData.riskLevel === 'High Risk'
+                          ? 'bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400'
+                          : predictionData.riskLevel === 'Moderate Risk'
+                          ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400'
+                          : 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'
+                      }`}>
+                        {predictionData.riskLevel}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-slate-400">Trend:</span>
+                      <span className={`px-2.5 py-1 rounded-full ${
+                        predictionData.trendStatus === 'Declining'
+                          ? 'text-rose-600 bg-rose-50 dark:bg-rose-900/20'
+                          : predictionData.trendStatus === 'Improving'
+                          ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20'
+                          : 'text-slate-500 dark:text-gray-400 bg-slate-50 dark:bg-gray-800/30'
+                      }`}>
+                        {predictionData.trendStatus}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Insights Section */}
+                  <div className="space-y-1.5">
+                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">AI Analysis & Insights</h5>
+                    <p className="text-xs text-slate-600 dark:text-gray-300 font-medium leading-relaxed bg-purple-50/40 dark:bg-purple-900/10 p-3.5 border border-purple-100/50 dark:border-purple-900/20 rounded-2xl transition-colors">
+                      {predictionData.insights}
+                    </p>
+                  </div>
+
+                  {/* Recommendations */}
+                  <div className="space-y-1.5">
+                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Intervention Recommendations</h5>
+                    <ul className="space-y-2">
+                      {predictionData.recommendations.map((rec, index) => (
+                        <li key={index} className="flex gap-2 items-start text-xs text-slate-600 dark:text-gray-300 font-bold">
+                          <Check className="h-4 w-4 text-purple-500 shrink-0 mt-0.5" />
+                          <span>{rec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="py-12 text-center text-xs text-slate-400 dark:text-gray-500">
+                  Could not load prediction data.
+                </div>
+              )}
+            </div>
+
+            {/* Footer model stats */}
+            <div className="p-4 bg-slate-50 dark:bg-gray-900 border-t border-slate-100 dark:border-gray-800 text-[10px] font-bold text-slate-400 text-center transition-colors">
+              Model Diagnostic Powered by: <span className="text-purple-500 uppercase">{predictionData?.powered_by || 'Unknown'}</span>
             </div>
           </div>
         </div>
