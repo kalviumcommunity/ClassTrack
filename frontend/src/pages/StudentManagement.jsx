@@ -31,6 +31,8 @@ const StudentManagement = () => {
   const [totalStudents, setTotalStudents] = useState(0);
   const [sortBy, setSortBy] = useState('rollNumber');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [useAISearch, setUseAISearch] = useState(false);
+  const [aiPoweredBy, setAiPoweredBy] = useState('');
 
   // Modal states
   const [isAddEditModalOpen, setIsAddEditModalOpen] = useState(false);
@@ -56,21 +58,32 @@ const StudentManagement = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const res = await api.get('/students', {
-        params: {
-          search,
-          department,
-          year,
-          section,
-          page,
-          limit: 8,
-          sortBy,
-          order: sortOrder
-        }
-      });
-      setStudents(res.data.students);
-      setTotalPages(res.data.pages);
-      setTotalStudents(res.data.total);
+      if (useAISearch && search.trim().length > 0) {
+        const res = await api.get('/ai/search', {
+          params: { q: search }
+        });
+        setStudents(res.data.results || []);
+        setTotalPages(1);
+        setTotalStudents(res.data.results?.length || 0);
+        setAiPoweredBy(res.data.powered_by);
+      } else {
+        setAiPoweredBy('');
+        const res = await api.get('/students', {
+          params: {
+            search,
+            department,
+            year,
+            section,
+            page,
+            limit: 8,
+            sortBy,
+            order: sortOrder
+          }
+        });
+        setStudents(res.data.students);
+        setTotalPages(res.data.pages);
+        setTotalStudents(res.data.total);
+      }
     } catch (error) {
       console.error('Error fetching students:', error);
       setToast({ message: 'Failed to retrieve students roster', type: 'error' });
@@ -81,7 +94,7 @@ const StudentManagement = () => {
 
   useEffect(() => {
     fetchStudents();
-  }, [search, department, year, section, page, sortBy, sortOrder]);
+  }, [search, department, year, section, page, sortBy, sortOrder, useAISearch]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -196,15 +209,38 @@ const StudentManagement = () => {
       {/* Search & Filter Bar */}
       <div className="bg-white dark:bg-gray-900 rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 transition-colors duration-300">
         {/* Search */}
-        <div className="relative lg:col-span-2">
-          <Search className="absolute inset-y-0 left-0 pl-3.5 h-full w-5 text-slate-400 dark:text-gray-500 pointer-events-none" />
-          <input
-            type="text"
-            placeholder="Search by name or roll number..."
-            value={search}
-            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            className="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm font-semibold transition-all"
-          />
+        <div className="relative lg:col-span-2 flex flex-col gap-1.5 justify-center">
+          <div className="relative">
+            <Search className="absolute inset-y-0 left-0 pl-3.5 h-full w-5 text-slate-400 dark:text-gray-500 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Search by name or roll number..."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              className="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm font-semibold transition-all"
+            />
+          </div>
+          <div className="flex items-center gap-2 pl-2 mt-0.5">
+            <label className="inline-flex items-center cursor-pointer text-xs select-none">
+              <input
+                type="checkbox"
+                checked={useAISearch}
+                onChange={(e) => {
+                  setUseAISearch(e.target.checked);
+                  setPage(1);
+                }}
+                className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 w-3.5 h-3.5 mr-1.5"
+              />
+              <span className="font-bold text-slate-500 dark:text-gray-400 flex items-center gap-1">
+                ✨ Enable AI Semantic Search
+              </span>
+            </label>
+            {useAISearch && aiPoweredBy && (
+              <span className="text-[10px] bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold px-2 py-0.5 rounded-full border border-blue-100 dark:border-blue-800 animate-pulse">
+                {aiPoweredBy === 'openai-embeddings' ? 'OpenAI Engine' : 'Regex Engine'}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Filter Department */}
