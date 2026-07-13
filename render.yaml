@@ -1,0 +1,50 @@
+services:
+  - type: web
+    name: classtrack-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # MongoDB Atlas — paste your connection string in the Render dashboard
+      - key: MONGO_URI
+        sync: false
+
+      # JWT — generate a strong random secret, e.g. `openssl rand -hex 64`
+      - key: JWT_SECRET
+        sync: false
+
+      # Frontend URL — set after Vercel deploy, e.g. https://classtrack.vercel.app
+      - key: FRONTEND_URL
+        sync: false
+
+      # Email (Gmail SMTP)
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+
+      # OpenAI — for smart student search
+      - key: OPENAI_API_KEY
+        sync: false
+
+      # Google OAuth
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      # Set to: https://<your-render-service-name>.onrender.com/api/auth/google/callback
+      - key: GOOGLE_CALLBACK_URL
+        sync: false
