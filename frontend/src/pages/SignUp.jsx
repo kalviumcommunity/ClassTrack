@@ -117,24 +117,19 @@ const SignUp = () => {
             </div>
           </div>
 
-          {/* Role */}
+          {/* Role — students only on public signup */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 mb-2 transition-colors duration-300">Role *</label>
             <div className="flex gap-3">
-              {['student', 'admin'].map(r => (
-                <button
-                  key={r} type="button"
-                  onClick={() => setForm({ ...form, role: r })}
-                  className={`flex-1 py-2.5 rounded-xl text-sm font-bold capitalize transition-all ${
-                    form.role === r
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                      : 'bg-slate-50 dark:bg-gray-800 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-gray-700'
-                  }`}
-                >
-                  {r}
-                </button>
-              ))}
+              <button
+                type="button"
+                className="flex-1 py-2.5 rounded-xl text-sm font-bold capitalize transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                disabled
+              >
+                student
+              </button>
             </div>
+            <p className="text-xs text-slate-400 dark:text-gray-500 mt-1">Admin accounts are managed by the system administrator.</p>
           </div>
 
           {/* Student-specific fields */}

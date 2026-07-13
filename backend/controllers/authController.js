@@ -77,6 +77,11 @@ const registerUser = async (req, res) => {
     let newUser;
 
     if (role === 'admin') {
+      // Enforce single-admin rule: only one admin account allowed in the system
+      const adminCount = await Admin.countDocuments();
+      if (adminCount > 0) {
+        return res.status(403).json({ message: 'An admin account already exists. Only one admin is allowed.' });
+      }
       newUser = await Admin.create({
         name,
         email: formattedEmail,

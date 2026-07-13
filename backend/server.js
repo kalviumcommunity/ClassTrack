@@ -12,6 +12,29 @@ dotenv.config();
 // Connect to Database
 connectDB();
 
+// Auto-create the single admin account on first boot if none exists
+const autoSeedAdmin = async () => {
+  try {
+    const Admin = require('./models/Admin');
+    const count = await Admin.countDocuments();
+    if (count === 0) {
+      await Admin.create({
+        name: 'System Admin',
+        email: 'admin@classtrack.com',
+        password: 'Admin@123',
+      });
+      console.log('==========================================');
+      console.log('✅ Default admin account created:');
+      console.log('   Email:    admin@classtrack.com');
+      console.log('   Password: Admin@123');
+      console.log('   ⚠️  Please change your password after login!');
+      console.log('==========================================');
+    }
+  } catch (err) {
+    console.error('Admin auto-seed failed:', err.message);
+  }
+};
+
 const app = express();
 
 // Security middleware
@@ -74,4 +97,5 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+  autoSeedAdmin();
 });
