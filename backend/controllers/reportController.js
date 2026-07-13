@@ -11,7 +11,17 @@ const getReports = async (req, res) => {
     // 1. Build Student Match Filter
     const studentQuery = {};
     if (studentId) {
-      studentQuery._id = studentId;
+      // Check if it looks like a valid MongoDB ObjectId (24 hex chars)
+      const isObjectId = /^[a-fA-F0-9]{24}$/.test(studentId);
+      if (isObjectId) {
+        studentQuery._id = studentId;
+      } else {
+        // Search by name or roll number (case-insensitive)
+        studentQuery.$or = [
+          { name: { $regex: studentId, $options: 'i' } },
+          { rollNumber: { $regex: studentId, $options: 'i' } },
+        ];
+      }
     } else {
       if (department) studentQuery.department = department;
       if (year) studentQuery.year = year;
